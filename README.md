@@ -2,6 +2,8 @@
 
 * Creates the infrastructure for the project
 
+> **Ref**: https://www.pulumi.com/docs/get-started/aws
+
 # Setup
 
 * AWS Setup
@@ -199,4 +201,55 @@ $ curl $(pulumi stack output bucket_endpoint)
         <h1>Hello, Pulumi!</h1>
     </body>
 </html>
+```
+
+# Destroy all
+
+```console
+$ pulumi destroy
+Previewing destroy (4trade-serverless-infra-aws)
+
+View Live: https://app.pulumi.com/marcellodesales/4trade/4trade-serverless-infra-aws/previews/6d4b8b9d-592a-49cf-ba67-37c52e88e7ee
+
+     Type                    Name                                Plan
+ -   pulumi:pulumi:Stack     4trade-4trade-serverless-infra-aws  delete
+ -   ├─ aws:s3:BucketObject  index.html                          delete
+ -   └─ aws:s3:Bucket        my-bucket                           delete
+
+Outputs:
+  - bucket_endpoint: "http://my-bucket-72340a9.s3-website-us-east-1.amazonaws.com"
+  - bucket_name    : "my-bucket-72340a9"
+
+Resources:
+    - 3 to delete
+
+Do you want to perform this destroy? yes
+Destroying (4trade-serverless-infra-aws)
+
+View Live: https://app.pulumi.com/marcellodesales/4trade/4trade-serverless-infra-aws/updates/5
+
+     Type                    Name                                Status
+ -   pulumi:pulumi:Stack     4trade-4trade-serverless-infra-aws  deleted
+ -   ├─ aws:s3:BucketObject  index.html                          deleted
+ -   └─ aws:s3:Bucket        my-bucket                           deleted
+
+Outputs:
+  - bucket_endpoint: "http://my-bucket-72340a9.s3-website-us-east-1.amazonaws.com"
+  - bucket_name    : "my-bucket-72340a9"
+
+Resources:
+    - 3 deleted
+
+Duration: 3s
+
+The resources in the stack have been deleted, but the history and configuration associated with the stack are still maintained.
+If you want to remove the stack completely, run 'pulumi stack rm 4trade-serverless-infra-aws'.
+```
+
+* Confirm it was deleted
+
+```console
+$ curl $(pulumi stack output bucket_endpoint)
+error: current stack does not have output property 'bucket_endpoint'
+curl: try 'curl --help' or 'curl --manual' for more information
 ```
