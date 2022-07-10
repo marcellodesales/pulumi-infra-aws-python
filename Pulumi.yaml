@@ -1,0 +1,6 @@
+name: 4trade
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Serverless infra for the app
